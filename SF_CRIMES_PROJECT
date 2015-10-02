@@ -11,12 +11,12 @@ getwd()
 setwd('~')
 setwd('Desktop')
 setwd('R')
-setwd('SF_CRIMES_PROJECT') //sets correct directory.
+setwd('SF_CRIMES_PROJECT') #sets correct directory.
 
-train <- read_csv("train.csv") //loads SF crime data set 
-sfMap<-get_map(location="sanfrancisco",zoom=12,source="osm") //gets map data from OpenStreetMap
+train <- read_csv("train.csv") #loads SF crime data set 
+sfMap<-get_map(location="sanfrancisco",zoom=12,source="osm") #gets map data from OpenStreetMap
 
-counts <- summarise(group_by(train, Category), Counts=length(Category)) //creates counts as list of most occuring crimes
+counts <- summarise(group_by(train, Category), Counts=length(Category)) #creates counts as list of most occuring crimes
 counts <- counts[order(-counts$Counts),]
 top <- train[train$Category %in% counts$Category[c(1,4:14)],]
 
@@ -27,6 +27,6 @@ p <- ggmap(sfMap) +
                                title="Type of Crime"))
   ggtitle("Top Crimes in San Francisco") +
   theme_light(base_size=20) 
-  //maps out the most occuring crimes by location
+  #maps out the most occuring crimes by location
 ggsave("sf_crimes_map.png", p, width=14, height=10, units="in")
 
